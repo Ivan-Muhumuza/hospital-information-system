@@ -3,10 +3,10 @@ package com.hospital.lab.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "bed_assignment")
-public class BedAssignment {
+@Table(name = "hospitalisation")
+public class Hospitalisation {
     @EmbeddedId
-    private BedAssignmentId id;
+    private HospitalisationId id;
 
     private String diagnosis;
 
@@ -23,5 +23,4 @@ public class BedAssignment {
     })
     private Ward ward;
 
-    // Getters and setters
 }

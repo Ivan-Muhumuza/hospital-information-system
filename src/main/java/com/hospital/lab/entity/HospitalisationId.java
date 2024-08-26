@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Embeddable
-public class BedAssignmentId implements Serializable {
+public class HospitalisationId implements Serializable {
     private Long patientNumber;
 
     @Embeddable
@@ -15,12 +15,10 @@ public class BedAssignmentId implements Serializable {
         @Column(name = "department_code")
         private Long departmentCode;
 
-        // Getters, Setters, equals(), and hashCode()
     }
 
     private WardId wardId;
 
-    // Getters, Setters, equals(), and hashCode()
 }
 
 

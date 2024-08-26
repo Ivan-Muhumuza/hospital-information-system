@@ -14,7 +14,6 @@ public class Patient {
     private String address;
     private String telephoneNumber;
 
-    // Getters and setters
 }
 
 

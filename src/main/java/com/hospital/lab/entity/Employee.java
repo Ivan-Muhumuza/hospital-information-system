@@ -15,6 +15,5 @@ public abstract class Employee {
     private String address;
     private String telephoneNumber;
 
-    // Getters and setters
 }
 

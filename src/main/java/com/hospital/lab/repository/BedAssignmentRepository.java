@@ -1,9 +1,9 @@
 package com.hospital.lab.repository;
 
-import com.hospital.lab.entity.BedAssignment;
-import com.hospital.lab.entity.BedAssignmentId;
+import com.hospital.lab.entity.Hospitalisation;
+import com.hospital.lab.entity.HospitalisationId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BedAssignmentRepository extends JpaRepository<BedAssignment, BedAssignmentId> {
+public interface BedAssignmentRepository extends JpaRepository<Hospitalisation, HospitalisationId> {
 }
 

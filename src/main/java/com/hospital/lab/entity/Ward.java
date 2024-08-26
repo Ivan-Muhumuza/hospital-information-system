@@ -20,7 +20,6 @@ public class Ward {
     @JoinColumn(name = "supervisor_id")
     private Nurse supervisor;
 
-    // Getters and setters
 }
 
 

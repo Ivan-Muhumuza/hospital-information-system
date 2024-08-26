@@ -17,7 +17,6 @@ public class Department {
     @JoinColumn(name = "director_id")
     private Doctor director;
 
-    // Getters and setters
 }
 
 

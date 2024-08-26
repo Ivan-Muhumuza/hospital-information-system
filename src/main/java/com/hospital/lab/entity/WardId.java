@@ -12,7 +12,6 @@ public class WardId implements Serializable {
     @Column(name = "ward_number")
     private int wardNumber;
 
-    // Getters, Setters, equals(), and hashCode()
 }
 
 

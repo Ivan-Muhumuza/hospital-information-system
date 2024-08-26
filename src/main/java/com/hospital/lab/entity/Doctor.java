@@ -10,6 +10,5 @@ public class Doctor extends Employee {
     @OneToOne(mappedBy = "director")
     private Department department;
 
-    // Getters and setters
 }
 

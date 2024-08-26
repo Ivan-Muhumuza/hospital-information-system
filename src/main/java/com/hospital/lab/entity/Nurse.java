@@ -15,7 +15,6 @@ public class Nurse extends Employee {
     @OneToOne(mappedBy = "supervisor")
     private Ward ward;
 
-    // Getters and setters
 }
 
 
