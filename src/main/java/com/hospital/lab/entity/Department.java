@@ -1,5 +1,6 @@
 package com.hospital.lab.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,8 +16,40 @@ public class Department {
 
     @OneToOne
     @JoinColumn(name = "director_id")
+    @JsonManagedReference
     private Doctor director;
 
+    public Long getDepartmentCode() {
+        return departmentCode;
+    }
+
+    public void setDepartmentCode(Long departmentCode) {
+        this.departmentCode = departmentCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public Doctor getDirector() {
+        return director;
+    }
+
+    public void setDirector(Doctor director) {
+        this.director = director;
+    }
 }
 
 
