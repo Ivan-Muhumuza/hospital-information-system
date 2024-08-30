@@ -1,25 +1,31 @@
 package com.hospital.lab.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Document
 public abstract class Employee {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long employeeNumber;
-
+    private String id;
+    private String employeeNumber;
     private String surname;
     private String firstName;
     private String address;
     private String telephoneNumber;
 
-    public Long getEmployeeNumber() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmployeeNumber() {
         return employeeNumber;
     }
 
-    public void setEmployeeNumber(Long employeeNumber) {
+    public void setEmployeeNumber(String employeeNumber) {
         this.employeeNumber = employeeNumber;
     }
 
@@ -31,20 +37,20 @@ public abstract class Employee {
         this.surname = surname;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getTelephoneNumber() {
@@ -54,5 +60,5 @@ public abstract class Employee {
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
-}
 
+}

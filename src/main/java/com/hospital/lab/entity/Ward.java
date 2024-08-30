@@ -1,31 +1,36 @@
 package com.hospital.lab.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "ward")
+@Document
 public class Ward {
-    @EmbeddedId
-    private WardId id;
-
-    @Column(name = "number_of_beds")
+    @Id
+    private String id;
+    private String wardNumber;
     private int numberOfBeds;
 
-    @ManyToOne
-    @MapsId("departmentCode")
-    @JoinColumn(name = "department_code")
+    @DBRef
     private Department department;
 
-    @OneToOne
-    @JoinColumn(name = "supervisor_id")
+    @DBRef
     private Nurse supervisor;
 
-    public WardId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(WardId id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getWardNumber() {
+        return wardNumber;
+    }
+
+    public void setWardNumber(String wardNumber) {
+        this.wardNumber = wardNumber;
     }
 
     public int getNumberOfBeds() {
@@ -51,6 +56,5 @@ public class Ward {
     public void setSupervisor(Nurse supervisor) {
         this.supervisor = supervisor;
     }
+
 }
-
-

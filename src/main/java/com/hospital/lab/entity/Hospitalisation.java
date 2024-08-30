@@ -1,44 +1,26 @@
 package com.hospital.lab.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "hospitalisation")
+@Document
 public class Hospitalisation {
-    @EmbeddedId
-    private HospitalisationId id;
-
+    @Id
+    private String id;
     private String diagnosis;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("patientNumber")
-    @JoinColumn(name = "patient_number")
+    @DBRef
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("wardId")
-    @JoinColumns({
-            @JoinColumn(name = "ward_number", referencedColumnName = "ward_number"),
-            @JoinColumn(name = "department_code", referencedColumnName = "department_code")
-    })
+    @DBRef
     private Ward ward;
 
-    // Default constructor
-    public Hospitalisation() {}
-
-    // Constructor with parameters
-    public Hospitalisation(Patient patient, Ward ward, String diagnosis) {
-        this.patient = patient;
-        this.ward = ward;
-        this.diagnosis = diagnosis;
-        this.id = new HospitalisationId(patient.getPatientNumber(), ward.getId());
-    }
-
-    public HospitalisationId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(HospitalisationId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -65,4 +47,5 @@ public class Hospitalisation {
     public void setWard(Ward ward) {
         this.ward = ward;
     }
+
 }

@@ -5,3 +5,5 @@
 [loom-link: Repositories](https://www.loom.com/share/e3feab10b5194297862d8c7f93deabb3)
 
 [loom-link: TransactionManagement and Caching](https://www.loom.com/share/bd0a4a5158754979b080c3e52dccd259)
+
+[loom-link: NoSQL and Redis](https://www.loom.com/share/18911d759a1f4c92bb7d03b1539e9b74)

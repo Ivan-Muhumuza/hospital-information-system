@@ -1,15 +1,12 @@
 package com.hospital.lab.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-
-@Entity
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document
 public class Doctor extends Employee {
-
     private String speciality;
 
-    @OneToOne(mappedBy = "director")
-    @JsonBackReference
+    @DBRef
     private Department department;
 
     public String getSpeciality() {
@@ -27,5 +24,5 @@ public class Doctor extends Employee {
     public void setDepartment(Department department) {
         this.department = department;
     }
-}
 
+}

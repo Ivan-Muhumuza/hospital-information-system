@@ -1,9 +1,16 @@
 package com.hospital.lab.repository;
 
 import com.hospital.lab.entity.Ward;
-import com.hospital.lab.entity.WardId;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
-public interface WardRepository extends JpaRepository<Ward, WardId> {
+import java.util.List;
+
+
+public interface WardRepository extends MongoRepository<Ward, String> {
+    List<Ward> findByNumberOfBeds(int numberOfBeds);
+
+    @Query("{'department.name': ?0}")
+    List<Ward> findByDepartmentName(String departmentName);
 }
 

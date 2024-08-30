@@ -1,29 +1,33 @@
 package com.hospital.lab.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 public class Department {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "department_code")
-    private Long departmentCode;
-
+    private String id;
+    private String departmentCode;
     private String name;
     private String building;
 
-    @OneToOne
-    @JoinColumn(name = "director_id")
-    @JsonManagedReference
+    @DBRef
     private Doctor director;
 
-    public Long getDepartmentCode() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDepartmentCode() {
         return departmentCode;
     }
 
-    public void setDepartmentCode(Long departmentCode) {
+    public void setDepartmentCode(String departmentCode) {
         this.departmentCode = departmentCode;
     }
 
@@ -50,7 +54,5 @@ public class Department {
     public void setDirector(Doctor director) {
         this.director = director;
     }
+
 }
-
-
-

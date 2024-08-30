@@ -1,8 +1,16 @@
 package com.hospital.lab.repository;
 
 import com.hospital.lab.entity.Doctor;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
-public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+import java.util.List;
+
+
+public interface DoctorRepository extends MongoRepository<Doctor, String> {
+    List<Doctor> findBySpeciality(String speciality);
+
+    @Query("{'department.name': ?0}")
+    List<Doctor> findByDepartmentName(String departmentName);
 }
 
