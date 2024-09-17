@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'node:27.2.1-alpine3.20⁠' }
+        docker { image 'node:27.2.1-alpine3.20' }
     }
 
     tools {
