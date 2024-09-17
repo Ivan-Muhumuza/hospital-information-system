@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        docker { image 'node:27.2.1-alpine3.20' }
-    }
+    agent any
 
     tools {
         maven 'maven-latest' // Use the Maven installation defined in Jenkins
