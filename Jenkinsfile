@@ -1,37 +1,23 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:27.2.1-alpine3.20⁠' }
+    }
 
     tools {
         maven 'maven-latest' // Use the Maven installation defined in Jenkins
-        dockerTool 'docker-latest'
+        // dockerTool 'docker-latest'
     }
     
     environment {
         DOCKER_CREDENTIALS = credentials('7997ef30-d000-42de-aeaa-05a65c902406') // DockerHub credentials stored in Jenkins
     }
-
-    stages {
-
-        stage('Init') {
-            steps {
-                script {
-                    // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
-                    def dockerHome = tool name: 'docker-latest', type: 'com.nirima.jenkins.plugins.docker.DockerTool'
-                    def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
-
-                    // Update the PATH environment variable within the script block
-                    env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-
-                }
-            }
-        }
     
     
         stage('Build') {
             steps {
                 // Build the Java application with Maven
-                // sh 'mvn clean package -DskipTests'
-                echo 'building now'
+                sh 'mvn clean package -DskipTests'
+                echo 'maven clean ran'
             }
         }
 
@@ -39,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using your Dockerfile
-                    // docker.build("muhumuzaivan/hospital-app:latest")
+                    docker.build("muhumuzaivan/hospital-app:latest")
                     echo  'docker  image'
                 }
             }
