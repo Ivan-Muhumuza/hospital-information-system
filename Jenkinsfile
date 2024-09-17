@@ -12,7 +12,7 @@ pipeline {
         DOCKER_CREDENTIALS = credentials('7997ef30-d000-42de-aeaa-05a65c902406') // DockerHub credentials stored in Jenkins
     }
     
-    
+    stages {
         stage('Build') {
             steps {
                 // Build the Java application with Maven
@@ -51,7 +51,7 @@ pipeline {
                     // sh 'docker-compose pull'  // Pull the latest image
                     // sh 'docker-compose up -d'  // Start new containers in detached mode
                     echo  'deploying image now'
-                // }
+                }
             }
         }
     }
