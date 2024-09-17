@@ -52,7 +52,7 @@ pipeline {
                     // docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
                     //     docker.image("muhumuzaivan/hospital-app:latest").push()
                     echo 'pushing image'
-                    }
+                    // }
                 }
             }
         }
