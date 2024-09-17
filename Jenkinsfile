@@ -51,7 +51,7 @@ pipeline {
                     // sh 'docker-compose pull'  // Pull the latest image
                     // sh 'docker-compose up -d'  // Start new containers in detached mode
                     echo  'deploying image now'
-                }
+                // }
             }
         }
     }
