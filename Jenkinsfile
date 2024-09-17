@@ -12,25 +12,26 @@ pipeline {
 
     stages {
 
-        stage('Init') {
-            steps {
-                script {
-                    // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
-                    def dockerHome = tool name: 'docker-latest', type: 'com.nirima.jenkins.plugins.docker.DockerTool'
-                    def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
+        // stage('Init') {
+        //     steps {
+        //         script {
+        //             // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
+        //             def dockerHome = tool name: 'docker-latest', type: 'com.nirima.jenkins.plugins.docker.DockerTool'
+        //             def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
 
-                    // Update the PATH environment variable within the script block
-                    env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+        //             // Update the PATH environment variable within the script block
+        //             env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
     
     
         stage('Build') {
             steps {
                 // Build the Java application with Maven
-                sh 'mvn clean package -DskipTests'
+                // sh 'mvn clean package -DskipTests'
+                echo 'building now'
             }
         }
 
@@ -38,7 +39,8 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using your Dockerfile
-                    docker.build("muhumuzaivan/hospital-app:latest")
+                    // docker.build("muhumuzaivan/hospital-app:latest")
+                    echo  'docker  image'
                 }
             }
         }
@@ -47,8 +49,9 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to Docker Hub
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
-                        docker.image("muhumuzaivan/hospital-app:latest").push()
+                    // docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
+                    //     docker.image("muhumuzaivan/hospital-app:latest").push()
+                    echo 'pushing image'
                     }
                 }
             }
@@ -58,9 +61,10 @@ pipeline {
             steps {
                 script {
                     // Pull the latest image and deploy using Docker Compose
-                    sh 'docker-compose down'  // Stop existing containers
-                    sh 'docker-compose pull'  // Pull the latest image
-                    sh 'docker-compose up -d'  // Start new containers in detached mode
+                    // sh 'docker-compose down'  // Stop existing containers
+                    // sh 'docker-compose pull'  // Pull the latest image
+                    // sh 'docker-compose up -d'  // Start new containers in detached mode
+                    echo  'deploying image now'
                 }
             }
         }
