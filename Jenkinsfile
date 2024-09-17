@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         maven 'maven-latest' // Use the Maven installation defined in Jenkins
+        docker 'docker-latest'
     }
     
     environment {
