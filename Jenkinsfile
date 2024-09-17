@@ -12,19 +12,19 @@ pipeline {
 
     stages {
 
-        // stage('Init') {
-        //     steps {
-        //         script {
-        //             // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
-        //             def dockerHome = tool name: 'docker-latest', type: 'com.nirima.jenkins.plugins.docker.DockerTool'
-        //             def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
+        stage('Init') {
+            steps {
+                script {
+                    // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
+                    def dockerHome = tool name: 'docker-latest', type: 'com.nirima.jenkins.plugins.docker.DockerTool'
+                    def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
 
-        //             // Update the PATH environment variable within the script block
-        //             env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+                    // Update the PATH environment variable within the script block
+                    env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
 
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
     
     
         stage('Build') {
