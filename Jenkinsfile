@@ -7,16 +7,25 @@ pipeline {
     
     environment {
         DOCKER_CREDENTIALS = credentials('7997ef30-d000-42de-aeaa-05a65c902406') // DockerHub credentials stored in Jenkins
-
-        // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
-        def dockerHome = tool name: 'docker-latest', type: 'hudson.plugins.ToolLocationNodeProperty$ToolLocationNodeProperty'
-        def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
-
-        // Update the PATH environment variable
-        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
     }
 
     stages {
+
+        stage('Init') {
+            steps {
+                script {
+                    // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
+                    def dockerHome = tool name: 'docker-latest', type: 'hudson.plugins.ToolLocationNodeProperty$ToolLocationNodeProperty'
+                    def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
+
+                    // Update the PATH environment variable within the script block
+                    env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+
+                }
+            }
+        }
+    
+    
         stage('Build') {
             steps {
                 // Build the Java application with Maven
