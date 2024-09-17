@@ -18,7 +18,7 @@ This is a simple Spring Boot application containerized using Docker. The applica
 
 ## Application Configuration
 
-The application connects to MongoDB, Redis, and MySQL with the following configurations:
+The application connects to MongoDB, & Redis with the following configurations:
 
 - **MongoDB**: `mongodb://mongo:27017/hospital`
 - **Redis**: `redis://localhost:6379`
@@ -36,7 +36,7 @@ The application connects to MongoDB, Redis, and MySQL with the following configu
    ```
 
 2. **Build and start the containers**:
-   Use Docker Compose to build the Docker image and start all containers (Spring Boot app, MongoDB, Redis, and MySQL):
+   Use Docker Compose to build the Docker image and start all containers (Spring Boot app, MongoDB, and Redis):
    ```bash
    docker-compose up --build
    ```
