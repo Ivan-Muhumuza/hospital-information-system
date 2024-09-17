@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Retrieve Docker and Maven tools from Jenkins Global Tool Configuration
-                    def dockerHome = tool name: 'docker-latest', type: 'hudson.plugins.ToolLocationNodeProperty$ToolLocationNodeProperty'
+                    def dockerHome = tool name: 'docker-latest', type: 'com.nirima.jenkins.plugins.docker.DockerTool'
                     def mavenHome = tool name: 'maven-latest', type: 'hudson.tasks.Maven$MavenInstallation'
 
                     // Update the PATH environment variable within the script block
