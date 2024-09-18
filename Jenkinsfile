@@ -36,7 +36,6 @@ pipeline {
                     try {
                         sh 'docker login'
                         sh 'docker push muhumuzaivan/hospital-app:latest'
-                        sh 'docker logout'
                         echo 'Docker image pushed successfully'
                     } catch (Exception e) {
                         error "Failed to push Docker image: ${e.message}"
@@ -52,6 +51,7 @@ pipeline {
                         sh 'docker-compose down'
                         sh 'docker-compose pull'
                         sh 'docker-compose up -d'
+                        sh 'docker logout'
                         echo 'Deployment completed successfully'
                     } catch (Exception e) {
                         error "Deployment failed: ${e.message}"
