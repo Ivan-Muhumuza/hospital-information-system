@@ -29,12 +29,14 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: '7997ef30-d000-42de-aeaa-05a65c902406', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    script {
-                        sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin docker.io'
+                withCredentials([usernamePassword(
+	                credentialsId: '7997ef30-d000-42de-aeaa-05a65c902406', 
+	                usernameVariable: 'dockerHubUser', 
+	                passwordVariable: 'dockerHubPassword'
+	                )]) {
+                        sh 'docker login -u ${dockerHubUser} -p${dockerHubPassword}'
                         sh 'docker push muhumuzaivan/hospital-app:latest'
                         sh 'docker logout'
-                    }
                 }
                 echo 'Docker image pushed'
             }
