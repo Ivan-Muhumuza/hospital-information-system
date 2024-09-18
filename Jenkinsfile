@@ -34,10 +34,9 @@ pipeline {
             steps {
                 script {
                     try {
-            				sh 'docker login'
-            				sh 'docker push muhumuzaivan/hospital-app:latest'
-            				sh 'docker logout'
-        				}
+                        sh 'docker login'
+                        sh 'docker push muhumuzaivan/hospital-app:latest'
+                        sh 'docker logout'
                         echo 'Docker image pushed successfully'
                     } catch (Exception e) {
                         error "Failed to push Docker image: ${e.message}"
