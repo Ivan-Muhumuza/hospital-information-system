@@ -30,15 +30,28 @@ pipeline {
             }
         }
 
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             try {
+        //                 sh 'docker login'
+        //                 sh 'docker push muhumuzaivan/hospital-app:latest'
+        //                 echo 'Docker image pushed successfully'
+        //             } catch (Exception e) {
+        //                 error "Failed to push Docker image: ${e.message}"
+        //             }
+        //         }
+        //     }
+        // }
+
         stage('Push Docker Image') {
             steps {
                 script {
-                    try {
-                        sh 'docker login'
-                        sh 'docker push muhumuzaivan/hospital-app:latest'
-                        echo 'Docker image pushed successfully'
-                    } catch (Exception e) {
-                        error "Failed to push Docker image: ${e.message}"
+                    withCredentials([usernamePassword(credentialsId: '7997ef30-d000-42de-aeaa-05a65c902406', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                            docker push muhumuzaivan/hospital-app:latest
+                        '''
                     }
                 }
             }
