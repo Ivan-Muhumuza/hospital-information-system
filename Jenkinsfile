@@ -48,16 +48,12 @@ pipeline {
         	steps {
         		script {
         			echo 'Pushing Docker image...'
-        			withCredentials([usernamePassword(
-        			credentialsId: '7997ef30-d000-42de-aeaa-05a65c902406', 
-        			usernameVariable: 'DOCKER_USERNAME', 
-        			passwordVariable: 'DOCKER_PASSWORD'
-        			)]) {
-        				sh '''
-        					echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin
-        					docker push muhumuzaivan/hospital-app:latest
-        				'''
-        			}
+        		
+        			sh '''
+        				echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR  --password-stdin
+        				docker push muhumuzaivan/hospital-app:latest
+        			'''
+        		
         		}
         	}
         }
