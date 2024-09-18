@@ -21,33 +21,30 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    // Build the Docker image using your Dockerfile
-                    docker.build("muhumuzaivan/hospital-app:latest")
-                    echo  'docker  image'
-                }
+                sh 'docker build -t muhumuzaivan/hospital-app:latest .'
+                echo 'Docker image built'
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    // Push the Docker image to Docker Hub
-                    // docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
-                    //     docker.image("muhumuzaivan/hospital-app:latest").push()
-                    echo 'pushing image'
-                    // }
+                withCredentials([usernamePassword(credentialsId: '7997ef30-d000-42de-aeaa-05a65c902406', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                    sh 'docker push muhumuzaivan/hospital-app:latest'
+                    sh 'docker logout'
                 }
+                echo 'Docker image pushed'
             }
         }
+    }
 
         stage('Deploy with Docker Compose') {
             steps {
                 script {
                     // Pull the latest image and deploy using Docker Compose
-                    // sh 'docker-compose down'  // Stop existing containers
-                    // sh 'docker-compose pull'  // Pull the latest image
-                    // sh 'docker-compose up -d'  // Start new containers in detached mode
+                    sh 'docker-compose down'  // Stop existing containers
+                    sh 'docker-compose pull'  // Pull the latest image
+                    sh 'docker-compose up -d'  // Start new containers in detached mode
                     echo  'deploying image now'
                 }
             }
