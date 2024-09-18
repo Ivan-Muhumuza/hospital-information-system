@@ -62,10 +62,13 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'docker-compose down'
-                        sh 'docker-compose pull'
-                        sh 'docker-compose up -d'
-                        sh 'docker logout'
+                        sh '''
+                            echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR  --password-stdin
+                            docker-compose down
+                            docker-compose pull
+                            docker-compose up -d
+                            docker logout
+                        '''
                         echo 'Deployment completed successfully'
                     } catch (Exception e) {
                         error "Deployment failed: ${e.message}"
