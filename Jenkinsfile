@@ -30,9 +30,11 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: '7997ef30-d000-42de-aeaa-05a65c902406', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-                    sh 'docker push muhumuzaivan/hospital-app:latest'
-                    sh 'docker logout'
+                    script {
+                        sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin docker.io'
+                        sh 'docker push muhumuzaivan/hospital-app:latest'
+                        sh 'docker logout'
+                    }
                 }
                 echo 'Docker image pushed'
             }
