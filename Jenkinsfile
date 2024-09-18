@@ -34,7 +34,7 @@ pipeline {
 	                usernameVariable: 'dockerHubUser', 
 	                passwordVariable: 'dockerHubPassword'
 	                )]) {
-                        sh 'docker login -u ${dockerHubUser} -p${dockerHubPassword}'
+                        sh 'docker login -u ${dockerHubUser} -p ${dockerHubPassword}'
                         sh 'docker push muhumuzaivan/hospital-app:latest'
                         sh 'docker logout'
                 }
