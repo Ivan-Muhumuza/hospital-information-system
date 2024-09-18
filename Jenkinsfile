@@ -12,8 +12,29 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh 'mvn clean compile'
                 echo 'Maven build completed'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    def hasTests = sh(script: 'find src/test/java -name "*.java" | wc -l', returnStdout: true).trim()
+                    if (hasTests != "0") {
+                        echo "Running tests..."
+                        sh 'mvn test'
+                    } else {
+                        echo "No tests found, skipping test stage"
+                    }
+                }
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package -DskipTests'
+                echo 'Maven package completed'
             }
         }
 
@@ -29,20 +50,6 @@ pipeline {
                 }
             }
         }
-
-        // stage('Push Docker Image') {
-        //     steps {
-        //         script {
-        //             try {
-        //                 sh 'docker login'
-        //                 sh 'docker push muhumuzaivan/hospital-app:latest'
-        //                 echo 'Docker image pushed successfully'
-        //             } catch (Exception e) {
-        //                 error "Failed to push Docker image: ${e.message}"
-        //             }
-        //         }
-        //     }
-        // }
 
         stage('Push Docker Image') {
         	steps {
