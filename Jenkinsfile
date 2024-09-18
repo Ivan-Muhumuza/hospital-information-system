@@ -11,6 +11,7 @@ pipeline {
     }
     
     stages {
+        
         stage('Build') {
             steps {
                 // Build the Java application with Maven
@@ -36,8 +37,7 @@ pipeline {
                 echo 'Docker image pushed'
             }
         }
-    }
-
+    
         stage('Deploy with Docker Compose') {
             steps {
                 script {
@@ -49,6 +49,7 @@ pipeline {
                 }
             }
         }
+    
     }
 
     post {
